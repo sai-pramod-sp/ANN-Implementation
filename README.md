@@ -2,7 +2,17 @@
 Implementation of ANN
 #### Creating environment
 
-conda create -ANN1 python=3.7
-
+```bash
+conda create -n {envname} python=3.7
+``` 
 ### Activating environment 
-conda activate ANN1
+```bash
+conda activate {envname}
+``` 
+### Stepl 1
+install requirements.txt using the following command 
+ 
+```bash
+pip install -r requirements.txt
+``` 
+
