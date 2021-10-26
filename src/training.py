@@ -18,9 +18,11 @@ def training(config_path):
     model = create_model(LOSS_FUNCTION,OPTIMIZER,METRICS,no_classes)
     EPOCHS = config["params"]["epochs"]
     VALIDATION = (x_valid, y_valid)
-
+     
+    #creating call backs
     callback_list = get_callbacks(config, x_train)
-
+    
+    #training the model with callbacks
     history = model.fit(x_train, y_train, epochs=EPOCHS, validation_data=VALIDATION, callbacks = callback_list)
     
     artifacts_dir = config["artifacts"]["artifacts_dir"]
