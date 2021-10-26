@@ -1,11 +1,12 @@
 import os
-from src.utils.common import read_config
-from src.utils.data_mgmt import get_data
-from src.utils.model import create_model, save_model
+from utils.common import read_config
+from utils.data_mgmt import get_data
+from utils.model import create_model, save_model
+from utils.callbacks import get_callbacks
 import argparse
 
 def training(config_path):
-    config = config(config_path)
+    config = read_config(config_path)
     validation_datasize = config["params"]["validation_datasize"]
     (x_train,y_train),(x_valid,y_valid),(x_test,y_test) = get_data(validation_datasize)
 
@@ -18,7 +19,9 @@ def training(config_path):
     EPOCHS = config["params"]["epochs"]
     VALIDATION = (x_valid, y_valid)
 
-    history = model.fit(x_train, y_train, epochs=EPOCHS, validation_data=VALIDATION)
+    callback_list = get_callbacks(config, x_train)
+
+    history = model.fit(x_train, y_train, epochs=EPOCHS, validation_data=VALIDATION, callbacks = callback_list)
     
     artifacts_dir = config["artifacts"]["artifacts_dir"]
     model_dir = config["artifacts"]["model_dir"]
@@ -29,6 +32,7 @@ def training(config_path):
     model_name = config["artifacts"]["model_name"]
 
     save_model(model, model_name, model_dir_path)
+
 
 if __name__ == '__main__':
     args = argparse.ArgumentParser()
