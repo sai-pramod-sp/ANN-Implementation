@@ -16,6 +16,7 @@ install requirements.txt using the following command
 pip install -r requirements.txt
 ``` 
 
+### Step 2: Change the current working path to src path to train the ANN 
 ```bash
 cd src/
 python training.py
