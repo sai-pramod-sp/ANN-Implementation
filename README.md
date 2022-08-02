@@ -16,3 +16,7 @@ install requirements.txt using the following command
 pip install -r requirements.txt
 ``` 
 
+```bash
+cd src/
+python training.py
+```
